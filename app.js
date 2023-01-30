@@ -6,7 +6,12 @@ const logger = require("morgan");
 const indexRouter = require("./routes/index");
 const cors = require("cors");
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+  origin: process.env.APP,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
